@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatório Executivo - Açoriana Alimentos</title>
+    <!-- Bibliotecas Externas -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -13,247 +14,280 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: #F8FAFC;
+            scroll-behavior: smooth;
         }
 
         .brand-gradient {
-            background: linear-gradient(to right, #E31A24, #F37021, #F37021);
+            background: linear-gradient(135deg, #E31A24 0%, #F37021 50%, #F37021 100%);
         }
 
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
         
-        .positive-value { color: #059669; font-weight: 700; }
-        .negative-value { color: #e11d48; font-weight: 700; }
+        .positive-text { color: #10b981; font-weight: 800; }
+        .negative-text { color: #f43f5e; font-weight: 800; }
 
+        .kpi-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
         .kpi-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .section-divider {
+            border-left: 5px solid #E31A24;
         }
     </style>
 </head>
 <body class="text-slate-900 pb-20">
 
-    <!-- HEADER PRINCIPAL -->
-    <header class="brand-gradient text-white p-8 md:p-12 mb-12 shadow-xl">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-            <div class="flex items-center gap-6">
-                <div class="bg-white p-2 rounded-2xl shadow-2xl flex items-center justify-center w-24 h-24 overflow-hidden border-4 border-white/20">
+    <!-- CABEÇALHO -->
+    <header class="brand-gradient text-white p-10 md:p-14 mb-12 shadow-2xl relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32"></div>
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
+            <div class="flex items-center gap-8">
+                <div class="bg-white p-2 rounded-3xl shadow-2xl flex items-center justify-center w-28 h-28 md:w-32 md:h-32 overflow-hidden border-4 border-white/20">
                     <img src="https://static.wixstatic.com/media/6c80f8_c553efe8a6d844d690cb2fbb14039a95~mv2.png/v1/fill/w_1080,h_1080,al_c/6c80f8_c553efe8a6d844d690cb2fbb14039a95~mv2.png" 
-                         alt="Logo Açoriana" 
-                         class="w-full h-full object-contain scale-110"
-                         onerror="this.style.display='none'">
+                         alt="Logo Açoriana Alimentos" 
+                         class="w-full h-full object-contain scale-110">
                 </div>
+                <div class="h-20 w-px bg-white/20 hidden md:block"></div>
                 <div>
-                    <h1 class="text-3xl md:text-4xl font-black tracking-tight uppercase italic leading-none mb-2">Relatório Executivo</h1>
-                    <p class="text-white/90 text-sm font-bold uppercase tracking-[0.2em] opacity-80 italic">Bimestre Jan–Fev 2026</p>
+                    <h1 class="text-3xl md:text-5xl font-black tracking-tight uppercase italic leading-none mb-3">Relatório Executivo</h1>
+                    <p class="text-white/90 text-sm md:text-lg font-bold uppercase tracking-[0.3em] opacity-80 italic">Bimestre Jan–Fev 2026</p>
                 </div>
             </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 md:px-8 space-y-24">
+    <main class="max-w-7xl mx-auto px-4 md:px-8 space-y-28">
 
         <!-- CAPÍTULO 1: VISÃO GERAL -->
-        <section id="visao-geral">
-            <div class="flex flex-col mb-8 border-l-4 border-[#E31A24] pl-6 py-2">
-                <div class="flex items-center gap-3">
-                    <div class="p-2 bg-red-50 rounded-lg text-[#E31A24]"><i data-lucide="bar-chart-3"></i></div>
-                    <h2 class="text-3xl font-black text-slate-800 uppercase italic tracking-tighter">Capítulo 1: Visão Geral do Bimestre</h2>
+        <section id="capitulo-1">
+            <div class="flex flex-col mb-10 section-divider pl-8 py-3">
+                <div class="flex items-center gap-4">
+                    <div class="p-3 bg-red-50 rounded-xl text-[#E31A24] shadow-sm"><i data-lucide="bar-chart-3" class="w-8 h-8"></i></div>
+                    <h2 class="text-4xl font-black text-slate-800 uppercase italic tracking-tighter">Capítulo 1: Visão Geral do Bimestre</h2>
                 </div>
-                <p class="text-slate-500 font-medium mt-1">Indicadores consolidados e mix de canais de venda.</p>
+                <p class="text-slate-500 text-lg font-medium mt-2">Indicadores consolidados e análise de mix por canal de venda.</p>
             </div>
 
             <!-- KPI GRID -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-                <!-- Faturamento -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 kpi-card transition-all">
-                    <div class="flex justify-between items-start mb-3">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="bg-white p-7 rounded-[2rem] border border-slate-100 kpi-card shadow-sm">
+                    <div class="flex justify-between items-start mb-4">
                         <div class="p-2 bg-red-50 rounded-lg text-[#E31A24]"><i data-lucide="credit-card"></i></div>
-                        <div class="flex items-center text-[10px] font-bold px-2 py-1 rounded-full bg-emerald-50 text-emerald-600">
+                        <div class="flex items-center text-xs font-black px-3 py-1 rounded-full bg-emerald-50 text-emerald-600">
                             <i data-lucide="trending-up" class="w-3 h-3 mr-1"></i> +4,21%
                         </div>
                     </div>
-                    <p class="text-xs text-slate-500 font-bold uppercase">Faturamento</p>
-                    <h3 class="text-xl font-black text-slate-900">R$ 5.264.487</h3>
-                    <p class="text-[11px] text-slate-400 mt-1 italic">LY: R$ 5.051.993 | <span class="positive-value">+R$ 212.494</span></p>
+                    <p class="text-xs text-slate-400 font-black uppercase tracking-widest">Faturamento</p>
+                    <h3 class="text-2xl font-black text-slate-900 mt-1">R$ 5.264.487</h3>
+                    <p class="text-[11px] text-slate-400 mt-2 italic font-medium">LY: R$ 5.051.993 | <span class="positive-text">+R$ 212.494</span></p>
                 </div>
-                <!-- Volume -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 kpi-card transition-all">
-                    <div class="flex justify-between items-start mb-3">
+
+                <div class="bg-white p-7 rounded-[2rem] border border-slate-100 kpi-card shadow-sm">
+                    <div class="flex justify-between items-start mb-4">
                         <div class="p-2 bg-red-50 rounded-lg text-[#E31A24]"><i data-lucide="package"></i></div>
-                        <div class="flex items-center text-[10px] font-bold px-2 py-1 rounded-full bg-emerald-50 text-emerald-600">
+                        <div class="flex items-center text-xs font-black px-3 py-1 rounded-full bg-emerald-50 text-emerald-600">
                             <i data-lucide="trending-up" class="w-3 h-3 mr-1"></i> +3,63%
                         </div>
                     </div>
-                    <p class="text-xs text-slate-500 font-bold uppercase">Volume</p>
-                    <h3 class="text-xl font-black text-slate-900">1.113.177</h3>
-                    <p class="text-[11px] text-slate-400 mt-1 italic">LY: 1.074.195 | <span class="positive-value">+38.982</span></p>
+                    <p class="text-xs text-slate-400 font-black uppercase tracking-widest">Volume</p>
+                    <h3 class="text-2xl font-black text-slate-900 mt-1">1.113.177</h3>
+                    <p class="text-[11px] text-slate-400 mt-2 italic font-medium">LY: 1.074.195 | <span class="positive-text">+38.982</span></p>
                 </div>
-                <!-- Positivação -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 kpi-card transition-all">
-                    <div class="flex justify-between items-start mb-3">
+
+                <div class="bg-white p-7 rounded-[2rem] border border-slate-100 kpi-card shadow-sm">
+                    <div class="flex justify-between items-start mb-4">
                         <div class="p-2 bg-red-50 rounded-lg text-[#E31A24]"><i data-lucide="users"></i></div>
-                        <div class="flex items-center text-[10px] font-bold px-2 py-1 rounded-full bg-emerald-50 text-emerald-600">
+                        <div class="flex items-center text-xs font-black px-3 py-1 rounded-full bg-emerald-50 text-emerald-600">
                             <i data-lucide="trending-up" class="w-3 h-3 mr-1"></i> +10,13%
                         </div>
                     </div>
-                    <p class="text-xs text-slate-500 font-bold uppercase">Positivação</p>
-                    <h3 class="text-xl font-black text-slate-900">2.631</h3>
-                    <p class="text-[11px] text-slate-400 mt-1 italic">LY: 2.389 | <span class="positive-value">+242</span></p>
+                    <p class="text-xs text-slate-400 font-black uppercase tracking-widest">Positivação</p>
+                    <h3 class="text-2xl font-black text-slate-900 mt-1">2.631</h3>
+                    <p class="text-[11px] text-slate-400 mt-2 italic font-medium">LY: 2.389 | <span class="positive-text">+242</span></p>
                 </div>
-                <!-- Ticket Médio -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 kpi-card transition-all">
-                    <div class="flex justify-between items-start mb-3">
+
+                <div class="bg-white p-7 rounded-[2rem] border border-slate-100 kpi-card shadow-sm">
+                    <div class="flex justify-between items-start mb-4">
                         <div class="p-2 bg-red-50 rounded-lg text-[#E31A24]"><i data-lucide="target"></i></div>
-                        <div class="flex items-center text-[10px] font-bold px-2 py-1 rounded-full bg-emerald-50 text-emerald-600">
+                        <div class="flex items-center text-xs font-black px-3 py-1 rounded-full bg-emerald-50 text-emerald-600">
                             <i data-lucide="trending-up" class="w-3 h-3 mr-1"></i> +1,88%
                         </div>
                     </div>
-                    <p class="text-xs text-slate-500 font-bold uppercase">Ticket Médio</p>
-                    <h3 class="text-xl font-black text-slate-900">R$ 337,16</h3>
-                    <p class="text-[11px] text-slate-400 mt-1 italic">LY: R$ 330,93 | <span class="positive-value">+R$ 6,23</span></p>
+                    <p class="text-xs text-slate-400 font-black uppercase tracking-widest">Ticket Médio</p>
+                    <h3 class="text-2xl font-black text-slate-900 mt-1">R$ 337,16</h3>
+                    <p class="text-[11px] text-slate-400 mt-2 italic font-medium">LY: R$ 330,93 | <span class="positive-text">+R$ 6,23</span></p>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- GRÁFICO DE CONTRIBUIÇÃO -->
-                <div class="lg:col-span-2 bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
-                    <h3 class="font-bold text-slate-800 mb-6 flex items-center gap-2 italic">Contribuição ΔFaturamento (R$) por Linha</h3>
-                    <div class="h-80 relative">
-                        <canvas id="lineChart"></canvas>
+                <!-- GRÁFICO -->
+                <div class="lg:col-span-2 bg-white p-10 rounded-[3rem] shadow-sm border border-slate-100">
+                    <h3 class="font-bold text-slate-800 mb-8 flex items-center gap-3 text-xl italic uppercase tracking-tighter">
+                        <i data-lucide="trending-up" class="text-[#F37021]"></i> Contribuição ΔFaturamento por Linha
+                    </h3>
+                    <div class="h-96 relative">
+                        <canvas id="contributionChart"></canvas>
+                    </div>
+                    <div class="mt-8 p-6 bg-red-50 rounded-2xl border border-red-100 flex items-center gap-4">
+                        <div class="bg-white p-2 rounded-full shadow-sm text-[#E31A24]"><i data-lucide="info" class="w-5 h-5"></i></div>
+                        <p class="text-sm text-red-900 font-medium italic">
+                            O crescimento bruto de <span class="positive-text">R$ 422k</span> nas linhas Pastel e Recheado neutralizou as retrações do período.
+                        </p>
                     </div>
                 </div>
 
-                <!-- MIX DE CANAL -->
-                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
-                    <h3 class="font-bold text-slate-800 mb-6 flex items-center gap-2 italic"><i data-lucide="pie-chart" class="w-5 h-5"></i> Mix de Canal</h3>
-                    <div class="space-y-6">
-                        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-100 border-r-4 border-r-[#F37021]">
-                            <p class="text-[10px] uppercase font-black text-slate-400 mb-1">Varejo (71,2%)</p>
-                            <p class="text-2xl font-black text-emerald-600">+R$ 154,4k</p>
-                            <p class="text-xs text-slate-500 font-bold mt-1 tracking-tight italic">Crescimento volume-led (+4,3%)</p>
+                <!-- CANAIS -->
+                <div class="bg-white p-10 rounded-[3rem] shadow-sm border border-slate-100 flex flex-col">
+                    <h3 class="font-bold text-slate-800 mb-8 flex items-center gap-3 text-xl italic uppercase tracking-tighter">
+                        <i data-lucide="pie-chart" class="text-[#E31A24]"></i> Mix de Canais
+                    </h3>
+                    <div class="space-y-6 flex-1">
+                        <div class="group p-6 bg-slate-50 rounded-3xl border border-slate-100 border-r-8 border-r-[#F37021] hover:bg-white transition-all">
+                            <p class="text-[10px] uppercase font-black text-slate-400 tracking-widest mb-1">Varejo (71,2%)</p>
+                            <p class="text-3xl font-black text-emerald-600">+R$ 154,4k</p>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="text-xs text-slate-500 font-bold italic">Crescimento Volume-Led</span>
+                                <span class="text-[10px] font-black bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">+4,29%</span>
+                            </div>
                         </div>
-                        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-100 border-r-4 border-r-[#E31A24]">
-                            <p class="text-[10px] uppercase font-black text-slate-400 mb-1">Rede (28,8%)</p>
-                            <p class="text-2xl font-black text-emerald-600">+R$ 58,1k</p>
-                            <p class="text-xs text-slate-500 font-bold mt-1 tracking-tight italic">Ticket qualificado (+R$ 24,35)</p>
+                        <div class="group p-6 bg-slate-50 rounded-3xl border border-slate-100 border-r-8 border-r-[#E31A24] hover:bg-white transition-all">
+                            <p class="text-[10px] uppercase font-black text-slate-400 tracking-widest mb-1">Rede (28,8%)</p>
+                            <p class="text-3xl font-black text-emerald-600">+R$ 58,1k</p>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="text-xs text-slate-500 font-bold italic">Ticket Qualificado</span>
+                                <span class="text-[10px] font-black bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">+R$ 24,35</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- CAPÍTULO 2: DIAGNÓSTICO POR LINHA -->
-        <section id="linhas">
-            <div class="flex flex-col mb-8 border-l-4 border-[#E31A24] pl-6 py-2">
-                <div class="flex items-center gap-3">
-                    <div class="p-2 bg-red-50 rounded-lg text-[#E31A24]"><i data-lucide="layers"></i></div>
-                    <h2 class="text-3xl font-black text-slate-800 uppercase italic tracking-tighter">Capítulo 2: Diagnóstico por Linha</h2>
+        <!-- CAPÍTULO 2: PERFORMANCE POR LINHA -->
+        <section id="capitulo-2">
+            <div class="flex flex-col mb-10 section-divider pl-8 py-3">
+                <div class="flex items-center gap-4">
+                    <div class="p-3 bg-red-50 rounded-xl text-[#E31A24] shadow-sm"><i data-lucide="layers" class="w-8 h-8"></i></div>
+                    <h2 class="text-4xl font-black text-slate-800 uppercase italic tracking-tighter">Capítulo 2: Diagnóstico por Linha</h2>
                 </div>
-                <p class="text-slate-500 font-medium mt-1">Análise profunda dos motores e freios de crescimento.</p>
+                <p class="text-slate-500 text-lg font-medium mt-2">Motores e retrações detalhadas por categoria de produto.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- PASTEL -->
-                <div class="bg-white rounded-[2rem] p-8 border border-slate-100 relative overflow-hidden group hover:shadow-xl transition-all">
-                    <div class="absolute top-0 left-0 w-full h-2 bg-[#F37021]"></div>
-                    <h4 class="font-black text-2xl text-slate-800 italic tracking-tighter mb-4">LINHA PASTEL</h4>
-                    <p class="text-emerald-600 font-black text-3xl">+13,2% FAT</p>
-                    <div class="flex justify-between items-end mt-4 text-xs font-bold uppercase text-slate-400 italic">
+                <div class="bg-white rounded-[2.5rem] p-10 shadow-sm border border-slate-100 relative overflow-hidden group hover:shadow-2xl transition-all">
+                    <div class="absolute top-0 left-0 w-full h-2.5 bg-[#F37021]"></div>
+                    <h4 class="font-black text-2xl text-slate-800 italic tracking-tighter mb-4 uppercase">Linha Pastel</h4>
+                    <p class="text-emerald-600 font-black text-4xl leading-none">+13,2% <span class="text-xs text-slate-400 uppercase">FAT</span></p>
+                    <div class="flex justify-between items-end mt-6 text-[10px] font-black uppercase text-slate-400 tracking-widest italic">
                         <span>Volume Unidades</span>
-                        <span class="text-emerald-600 font-black text-sm">+19,7%</span>
+                        <span class="text-emerald-600 text-sm">+19,7%</span>
                     </div>
-                    <div class="w-full bg-slate-100 h-2 rounded-full mt-2 overflow-hidden">
-                        <div class="bg-[#F37021] h-full" style="width: 90%"></div>
+                    <div class="w-full bg-slate-100 h-2.5 rounded-full mt-2 overflow-hidden">
+                        <div class="bg-[#F37021] h-full transition-all duration-1000" style="width: 90%"></div>
                     </div>
-                    <div class="p-5 bg-orange-50 rounded-2xl mt-8 border border-orange-100 leading-relaxed italic">
-                        <p class="text-orange-900 text-xs font-black uppercase italic mb-2">Diagnóstico Analítico</p>
-                        Motor principal do bimestre, porém com erosão de preço médio de <span class="text-rose-600 font-black">5.5%</span>. Risco de manter volume sacrificando rentabilidade.
+                    <div class="p-6 bg-orange-50 rounded-3xl mt-10 border border-orange-100 leading-relaxed italic">
+                        <p class="text-orange-900 text-xs font-black uppercase tracking-widest mb-2">Análise de Mix</p>
+                        <p class="text-sm text-orange-800 font-medium leading-relaxed">
+                            Crescimento impulsionado por volume, mas com retração de preço médio de <span class="negative-text">5.5%</span>. Foco em SKUs premium é mandatório.
+                        </p>
                     </div>
                 </div>
 
                 <!-- RECHEADO -->
-                <div class="bg-white rounded-[2rem] p-8 border border-slate-100 relative overflow-hidden group hover:shadow-xl transition-all">
-                    <div class="absolute top-0 left-0 w-full h-2 bg-[#E31A24]"></div>
-                    <h4 class="font-black text-2xl text-slate-800 italic tracking-tighter mb-4">LINHA RECHEADO</h4>
-                    <p class="text-emerald-600 font-black text-3xl">+14,6% FAT</p>
-                    <div class="flex justify-between items-end mt-4 text-xs font-bold uppercase text-slate-400 italic">
+                <div class="bg-white rounded-[2.5rem] p-10 shadow-sm border border-slate-100 relative overflow-hidden group hover:shadow-2xl transition-all">
+                    <div class="absolute top-0 left-0 w-full h-2.5 bg-[#E31A24]"></div>
+                    <h4 class="font-black text-2xl text-slate-800 italic tracking-tighter mb-4 uppercase">Linha Recheado</h4>
+                    <p class="text-emerald-600 font-black text-4xl leading-none">+14,6% <span class="text-xs text-slate-400 uppercase">FAT</span></p>
+                    <div class="flex justify-between items-end mt-6 text-[10px] font-black uppercase text-slate-400 tracking-widest italic">
                         <span>Volume Unidades</span>
-                        <span class="text-emerald-600 font-black text-sm">+13,3%</span>
+                        <span class="text-emerald-600 text-sm">+13,3%</span>
                     </div>
-                    <div class="w-full bg-slate-100 h-2 rounded-full mt-2 overflow-hidden">
-                        <div class="bg-[#E31A24] h-full" style="width: 75%"></div>
+                    <div class="w-full bg-slate-100 h-2.5 rounded-full mt-2 overflow-hidden">
+                        <div class="bg-[#E31A24] h-full transition-all duration-1000" style="width: 75%"></div>
                     </div>
-                    <div class="p-5 bg-red-50 rounded-2xl mt-8 border border-red-100 leading-relaxed italic">
-                        <p class="text-red-900 text-xs font-black uppercase italic mb-2">Diagnóstico Analítico</p>
-                        Crescimento mais equilibrado e saudável da companhia. Ganho real de preço/mix (<span class="text-emerald-600 font-black">+1.1%</span>).
+                    <div class="p-6 bg-red-50 rounded-3xl mt-10 border border-red-100 leading-relaxed italic">
+                        <p class="text-red-900 text-xs font-black uppercase tracking-widest mb-2">Análise de Mix</p>
+                        <p class="text-sm text-red-800 font-medium leading-relaxed">
+                            A melhor performance do bimestre. Crescimento saudável com ganho real de preço/mix (<span class="positive-text">+1.1%</span>).
+                        </p>
                     </div>
                 </div>
 
-                <!-- RETRAÇÕES -->
-                <div class="bg-slate-800 rounded-[2rem] p-8 shadow-xl text-white relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16"></div>
-                    <h4 class="font-black text-xl italic uppercase mb-6 text-white/50 tracking-tighter">Retrações do Bimestre</h4>
-                    <div class="space-y-6">
-                        <div class="border-l-2 border-rose-500 pl-4">
-                            <p class="text-[10px] font-black uppercase text-white/40 tracking-widest">Terceiros</p>
-                            <p class="text-rose-400 font-black text-xl">-20,6% FAT</p>
+                <!-- OUTROS -->
+                <div class="bg-slate-900 rounded-[2.5rem] p-10 shadow-xl text-white relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full -mr-24 -mt-24"></div>
+                    <h4 class="font-black text-xl italic uppercase mb-8 text-white/40 tracking-widest">Retrações Críticas</h4>
+                    <div class="space-y-8 relative z-10">
+                        <div class="group border-l-4 border-rose-500 pl-6 py-1">
+                            <p class="text-[10px] font-black uppercase text-white/30 tracking-[0.2em] mb-1">Terceiros</p>
+                            <p class="text-rose-400 font-black text-3xl leading-none">-20,6%</p>
+                            <p class="text-[10px] text-white/50 italic mt-1 uppercase font-bold tracking-tighter">Ruptura de Execução</p>
                         </div>
-                        <div class="border-l-2 border-rose-500 pl-4">
-                            <p class="text-[10px] font-black uppercase text-white/40 tracking-widest">Macarrão</p>
-                            <p class="text-rose-400 font-black text-xl">-7,0% FAT</p>
+                        <div class="group border-l-4 border-rose-500 pl-6 py-1">
+                            <p class="text-[10px] font-black uppercase text-white/30 tracking-[0.2em] mb-1">Macarrão</p>
+                            <p class="text-rose-400 font-black text-3xl leading-none">-7,0%</p>
+                            <p class="text-[10px] text-white/50 italic mt-1 uppercase font-bold tracking-tighter">Perda de Intensidade</p>
                         </div>
-                        <div class="border-l-2 border-rose-500 pl-4">
-                            <p class="text-[10px] font-black uppercase text-white/40 tracking-widest">Salgados</p>
-                            <p class="text-rose-400 font-black text-xl">-3,6% FAT</p>
+                        <div class="group border-l-4 border-rose-500 pl-6 py-1">
+                            <p class="text-[10px] font-black uppercase text-white/30 tracking-[0.2em] mb-1">Salgados</p>
+                            <p class="text-rose-400 font-black text-3xl leading-none">-3,6%</p>
+                            <p class="text-[10px] text-white/50 italic mt-1 uppercase font-bold tracking-tighter">Oportunidade de Base</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- CAPÍTULO 3: PERFORMANCE POR ROTA -->
-        <section id="rotas">
-            <div class="flex flex-col mb-8 border-l-4 border-[#E31A24] pl-6 py-2">
-                <div class="flex items-center gap-3">
-                    <div class="p-2 bg-red-50 rounded-lg text-[#E31A24]"><i data-lucide="map"></i></div>
-                    <h2 class="text-3xl font-black text-slate-800 uppercase italic tracking-tighter">Capítulo 3: Performance por Rota</h2>
+        <!-- CAPÍTULO 3: ANÁLISE DE ROTAS -->
+        <section id="capitulo-3">
+            <div class="flex flex-col mb-10 section-divider pl-8 py-3">
+                <div class="flex items-center gap-4">
+                    <div class="p-3 bg-red-50 rounded-xl text-[#E31A24] shadow-sm"><i data-lucide="map" class="w-8 h-8"></i></div>
+                    <h2 class="text-4xl font-black text-slate-800 uppercase italic tracking-tighter">Capítulo 3: Performance por Rota</h2>
                 </div>
-                <p class="text-slate-500 font-medium mt-1">Resultados por território de vendas e auditoria de campo.</p>
+                <p class="text-slate-500 text-lg font-medium mt-2">Resultados por território e auditoria de campo em 8 pontos de atenção.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <!-- MOTORES -->
-                <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100">
-                    <h3 class="text-[#059669] font-black text-xl mb-8 flex items-center gap-3 uppercase italic tracking-tighter">
-                        <i data-lucide="trending-up"></i> Motores do Bimestre
+                <div class="bg-white p-10 rounded-[3.5rem] shadow-sm border border-slate-100">
+                    <h3 class="text-[#059669] font-black text-2xl mb-10 flex items-center gap-4 uppercase italic tracking-tighter">
+                        <i data-lucide="navigation-2" class="fill-[#059669]/10"></i> Motores de Crescimento
                     </h3>
-                    <div class="space-y-4" id="motors-list">
-                        <!-- Gerado por JS -->
+                    <div class="space-y-5" id="motors-container">
+                        <!-- JS Render -->
                     </div>
                 </div>
 
                 <!-- GARGALOS -->
-                <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100">
-                    <h3 class="text-rose-600 font-black text-xl mb-8 flex items-center gap-3 uppercase italic tracking-tighter">
-                        <i data-lucide="alert-triangle"></i> Bloqueio de Crescimento (8 Rotas)
+                <div class="bg-white p-10 rounded-[3.5rem] shadow-sm border border-slate-100">
+                    <h3 class="text-rose-600 font-black text-2xl mb-10 flex items-center gap-4 uppercase italic tracking-tighter">
+                        <i data-lucide="alert-circle" class="fill-rose-600/10"></i> Pontos de Atenção (8 Rotas)
                     </h3>
-                    <div class="space-y-4 max-h-[520px] overflow-y-auto pr-3 custom-scrollbar" id="critical-list">
-                        <!-- Gerado por JS -->
+                    <div class="space-y-5 max-h-[600px] overflow-y-auto pr-4 custom-scrollbar" id="critical-container">
+                        <!-- JS Render -->
                     </div>
                 </div>
             </div>
 
-            <div class="mt-12 bg-slate-900 rounded-[3rem] p-10 text-white relative overflow-hidden shadow-2xl">
-                <div class="flex flex-col md:flex-row items-center gap-10">
-                    <div class="p-8 bg-white/10 rounded-[2rem] backdrop-blur-xl border border-white/20">
-                        <i data-lucide="navigation" class="w-14 h-14 text-yellow-400"></i>
+            <div class="mt-16 bg-slate-900 rounded-[4rem] p-12 text-white relative overflow-hidden shadow-2xl">
+                <div class="absolute bottom-0 right-0 w-96 h-96 bg-[#F37021]/5 rounded-full -mb-48 -mr-48"></div>
+                <div class="flex flex-col md:flex-row items-center gap-12 relative z-10">
+                    <div class="p-10 bg-white/5 rounded-[2.5rem] backdrop-blur-2xl border border-white/10">
+                        <i data-lucide="map-pin" class="w-16 h-16 text-[#FFCB05]"></i>
                     </div>
                     <div class="flex-1">
-                        <h4 class="text-2xl font-black uppercase italic mb-4 tracking-tighter">Diagnóstico Territorial Consolidado</h4>
-                        <p class="text-slate-400 font-medium leading-relaxed italic text-lg">
-                            Observamos um <span class="text-rose-400 font-black underline decoration-2 decoration-rose-500 underline-offset-4">alerta sistémico</span>: Enquanto poucas rotas seguram o volume, um bloco consolidado de <span class="text-rose-400 font-black">8 ROTAS CRÍTICAS</span> (03, 02, 20, 07, 10, 12, 08 e 22) geram uma <span class="text-rose-400 font-black">queda acumulada</span> superior a <span class="text-rose-400 font-black tracking-tight">R$ 223 mil</span>.
+                        <h4 class="text-3xl font-black uppercase italic mb-6 tracking-tighter">Diagnóstico Territorial Consolidado</h4>
+                        <p class="text-slate-400 font-medium leading-relaxed italic text-xl md:text-2xl max-w-4xl">
+                            Enfrentamos um <span class="text-rose-400 font-black underline decoration-rose-500 decoration-4 underline-offset-8">alerta operacional</span>: Enquanto o volume cresce em frentes específicas, um bloco de <span class="text-rose-400 font-black uppercase tracking-widest">8 ROTAS CRÍTICAS</span> (03, 02, 20, 07, 10, 12, 08 e 22) apresenta uma <span class="text-rose-400 font-black">retração acumulada</span> superior a <span class="text-rose-400 font-black tracking-tight">R$ 223 mil</span>.
                         </p>
                     </div>
                 </div>
@@ -261,57 +295,57 @@
         </section>
 
         <!-- CAPÍTULO 4: DIRETRIZES ESTRATÉGICAS -->
-        <section id="estratégia" class="pb-20">
-            <div class="flex flex-col mb-8 border-l-4 border-[#E31A24] pl-6 py-2">
-                <div class="flex items-center gap-3">
-                    <div class="p-2 bg-red-50 rounded-lg text-[#E31A24]"><i data-lucide="check-circle-2"></i></div>
-                    <h2 class="text-3xl font-black text-slate-800 uppercase italic tracking-tighter">Capítulo 4: Diretrizes Açoriana</h2>
+        <section id="capitulo-4" class="pb-20">
+            <div class="flex flex-col mb-10 section-divider pl-8 py-3">
+                <div class="flex items-center gap-4">
+                    <div class="p-3 bg-red-50 rounded-xl text-[#E31A24] shadow-sm"><i data-lucide="check-circle-2" class="w-8 h-8"></i></div>
+                    <h2 class="text-4xl font-black text-slate-800 uppercase italic tracking-tighter">Capítulo 4: Diretrizes Açoriana</h2>
                 </div>
-                <p class="text-slate-500 font-medium mt-1">Plano de acção imediato para o próximo período.</p>
+                <p class="text-slate-500 text-lg font-medium mt-2">Planeamento estratégico e plano de acção imediato.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
                 <!-- OPORTUNIDADES -->
-                <div class="bg-white p-10 rounded-[3rem] border border-slate-100 transition-all hover:border-[#F37021] hover:shadow-lg">
-                    <h3 class="text-[#F37021] font-black text-xl mb-8 uppercase tracking-tight flex items-center gap-3 italic">
+                <div class="bg-white p-12 rounded-[4rem] shadow-sm border border-slate-100 transition-all hover:border-[#F37021] hover:shadow-2xl">
+                    <h3 class="text-[#F37021] font-black text-2xl mb-10 uppercase tracking-tight flex items-center gap-4 italic">
                         Oportunidades <i data-lucide="arrow-right"></i>
                     </h3>
-                    <div class="space-y-8">
-                        <div class="flex gap-5">
-                            <span class="font-black text-4xl text-slate-100">01</span>
+                    <div class="space-y-10">
+                        <div class="flex gap-6">
+                            <span class="font-black text-6xl text-slate-100 leading-none">01</span>
                             <div>
-                                <p class="font-black text-slate-800 text-sm uppercase italic">Gestão de Mix Pastel</p>
-                                <p class="text-slate-500 text-sm mt-1 font-medium italic leading-relaxed">Elevar o ticket médio nas rotas saturadas para compensar a retração de preço.</p>
+                                <p class="font-black text-slate-800 text-sm uppercase italic tracking-widest">Gestão de Mix Pastel</p>
+                                <p class="text-slate-500 text-sm mt-2 font-medium italic leading-relaxed">Incrementar o preço médio nas rotas com erosão de valor para restaurar a margem bruta.</p>
                             </div>
                         </div>
-                        <div class="flex gap-5">
-                            <span class="font-black text-4xl text-slate-100">02</span>
+                        <div class="flex gap-6">
+                            <span class="font-black text-6xl text-slate-100 leading-none">02</span>
                             <div>
-                                <p class="font-black text-slate-800 text-sm uppercase italic">Alavancagem de Salgados</p>
-                                <p class="text-slate-500 text-sm mt-1 font-medium italic leading-relaxed">Converter o crescimento de base (+8%) em volume real através de estratégias de cross-selling.</p>
+                                <p class="font-black text-slate-800 text-sm uppercase italic tracking-widest">Alavancagem de Salgados</p>
+                                <p class="text-slate-500 text-sm mt-2 font-medium italic leading-relaxed">Capitalizar a expansão da base de clientes (+8%) transformando-a em volume real através de cross-selling.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- RISCOS -->
-                <div class="bg-white p-10 rounded-[3rem] border border-slate-100 transition-all hover:border-[#E31A24] hover:shadow-lg">
-                    <h3 class="text-[#E31A24] font-black text-xl mb-8 uppercase tracking-tight flex items-center gap-3 italic">
-                        Riscos Críticos <i data-lucide="x-circle"></i>
+                <div class="bg-white p-12 rounded-[4rem] shadow-sm border border-slate-100 transition-all hover:border-[#E31A24] hover:shadow-2xl">
+                    <h3 class="text-[#E31A24] font-black text-2xl mb-10 uppercase tracking-tight flex items-center gap-4 italic">
+                        Riscos Críticos <i data-lucide="alert-triangle"></i>
                     </h3>
-                    <div class="space-y-8">
-                        <div class="flex gap-5">
-                            <span class="font-black text-4xl text-slate-100">!</span>
+                    <div class="space-y-10">
+                        <div class="flex gap-6">
+                            <span class="font-black text-6xl text-slate-100 leading-none">!</span>
                             <div>
-                                <p class="font-black text-slate-800 text-sm uppercase italic tracking-tighter">Auditoria em 8 Rotas</p>
-                                <p class="text-slate-500 text-sm mt-1 font-medium italic leading-relaxed">Queda de faturamento nas rotas críticas exige revisão imediata de frequência e ruptura.</p>
+                                <p class="font-black text-slate-800 text-sm uppercase italic tracking-widest">Auditoria em 8 Rotas</p>
+                                <p class="text-slate-500 text-sm mt-2 font-medium italic leading-relaxed">A retração acentuada nestes territórios exige revisão urgente de frequência e controlo de rupturas.</p>
                             </div>
                         </div>
-                        <div class="flex gap-5">
-                            <span class="font-black text-4xl text-slate-100">!</span>
+                        <div class="flex gap-6">
+                            <span class="font-black text-6xl text-slate-100 leading-none">!</span>
                             <div>
-                                <p class="font-black text-slate-800 text-sm uppercase italic tracking-tighter">Dependência de Linha</p>
-                                <p class="text-slate-500 text-sm mt-1 font-medium italic leading-relaxed">Apenas duas linhas motores mantêm o crescimento líquido. Alerta de concentração extrema.</p>
+                                <p class="font-black text-slate-800 text-sm uppercase italic tracking-widest">Concentração de Faturamento</p>
+                                <p class="text-slate-500 text-sm mt-2 font-medium italic leading-relaxed">A dependência exclusiva de duas linhas motores expõe a companhia a riscos de sazonalidade.</p>
                             </div>
                         </div>
                     </div>
@@ -319,100 +353,100 @@
             </div>
 
             <!-- BOTÃO META -->
-            <div class="flex flex-col items-center justify-center p-12 bg-white rounded-[4rem] border-4 border-slate-100 text-center shadow-xl">
-                <i data-lucide="target" class="w-16 h-16 text-[#E31A24] mb-6"></i>
-                <h3 class="text-3xl font-black text-slate-800 uppercase italic mb-4 tracking-tighter">Meta do Próximo Bimestre</h3>
-                <p class="text-slate-500 text-lg font-medium italic max-w-2xl mb-10 leading-relaxed">
+            <div class="flex flex-col items-center justify-center p-16 bg-white rounded-[5rem] border-4 border-slate-100 text-center shadow-2xl relative">
+                <div class="p-6 bg-red-50 rounded-full mb-8"><i data-lucide="target" class="w-14 h-14 text-[#E31A24]"></i></div>
+                <h3 class="text-4xl font-black text-slate-800 uppercase italic mb-6 tracking-tighter">Meta do Próximo Bimestre</h3>
+                <p class="text-slate-500 text-xl font-medium italic max-w-3xl mb-12 leading-relaxed">
                     "Equilibrar o desempenho das rotas críticas, estancar a queda de Terceiros, recuperar a rentabilidade da Linha Pastel e alavancar a linha salgados."
                 </p>
-                <button class="bg-gradient-to-r from-[#E31A24] to-[#F37021] text-white px-12 py-5 rounded-2xl font-black text-lg uppercase tracking-widest shadow-2xl shadow-red-200 hover:scale-105 transition-all flex items-center gap-3">
-                    ELABORAR PLANO DE ACÇÃO <i data-lucide="chevron-right"></i>
+                <button class="brand-gradient text-white px-16 py-6 rounded-[2rem] font-black text-lg uppercase tracking-[0.3em] shadow-2xl shadow-red-200 hover:scale-105 transition-all flex items-center gap-4">
+                    ELABORAR PLANO DE ACÇÃO <i data-lucide="arrow-right"></i>
                 </button>
             </div>
         </section>
     </main>
 
-    <!-- FOOTER -->
-    <footer class="bg-slate-900 text-white py-16">
-        <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-left">
-            <div class="flex flex-col items-center md:items-start gap-4">
-                <div class="bg-white p-2 rounded-2xl w-24 h-24 shadow-2xl">
+    <!-- RODAPÉ -->
+    <footer class="bg-slate-950 text-white py-20 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-16 text-center md:text-left">
+            <div class="flex flex-col items-center md:items-start gap-6">
+                <div class="bg-white p-3 rounded-2xl w-28 h-28 shadow-2xl">
                     <img src="https://static.wixstatic.com/media/6c80f8_c553efe8a6d844d690cb2fbb14039a95~mv2.png/v1/fill/w_1080,h_1080,al_c/6c80f8_c553efe8a6d844d690cb2fbb14039a95~mv2.png" alt="Logo" class="w-full h-full object-contain">
                 </div>
-                <p class="text-slate-500 text-xs font-bold uppercase tracking-[0.4em]">Alimentos que geram valor</p>
+                <p class="text-slate-500 text-xs font-black uppercase tracking-[0.5em]">Alimentos que geram valor</p>
             </div>
-            <div class="text-slate-400 text-[10px] uppercase font-bold tracking-[0.2em] max-sm leading-relaxed border-x border-white/10 px-12 hidden md:block">
-                Consolidado Bimestral Comercial • Março 2026 • Açoriana Alimentos • Dados Estratégicos Confidenciais.
+            <div class="text-slate-400 text-[10px] uppercase font-bold tracking-[0.3em] max-w-sm leading-loose border-x border-white/5 px-12 hidden md:block">
+                Consolidado Bimestral de Performance Comercial • Março 2026 • Açoriana Alimentos S/A • Dados Estratégicos Confidenciais.
             </div>
-            <div class="flex gap-6">
-                <div class="w-12 h-12 rounded-2xl border border-white/10 flex items-center justify-center hover:bg-[#E31A24] cursor-pointer transition-all">
-                    <i data-lucide="target" class="w-5 h-5 opacity-50 hover:opacity-100"></i>
+            <div class="flex gap-8">
+                <div class="w-14 h-14 rounded-3xl border border-white/10 flex items-center justify-center hover:bg-[#E31A24] cursor-pointer transition-all group">
+                    <i data-lucide="shield-check" class="w-6 h-6 opacity-30 group-hover:opacity-100"></i>
                 </div>
-                <div class="w-12 h-12 rounded-2xl border border-white/10 flex items-center justify-center hover:bg-[#F37021] cursor-pointer transition-all">
-                    <i data-lucide="navigation" class="w-5 h-5 opacity-50 hover:opacity-100"></i>
+                <div class="w-14 h-14 rounded-3xl border border-white/10 flex items-center justify-center hover:bg-[#F37021] cursor-pointer transition-all group">
+                    <i data-lucide="activity" class="w-6 h-6 opacity-30 group-hover:opacity-100"></i>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Inicializar Lucide Icons
+        // Inicialização de Ícones
         lucide.createIcons();
 
-        // Dados das Rotas
-        const routeData = [
+        // Base de Dados de Rotas (Consolidada)
+        const routes = [
             { id: 'ROTA 27', delta: 29158, perc: '+231,09%', trend: 'up', focus: 'Explosão de Volume' },
             { id: 'ROTA 28', delta: 66188, perc: '+69,57%', trend: 'up', focus: 'Recuperação Forte' },
             { id: 'ROTA 24', delta: 34781, perc: '+22,77%', trend: 'up', focus: 'Intensidade' },
             { id: 'ROTA 04', delta: 38334, perc: '+18,38%', trend: 'up', focus: 'Consistência' },
             { id: 'ROTA 03', delta: -56326, perc: '-22,20%', trend: 'down', focus: 'Queda Crítica' },
             { id: 'ROTA 02', delta: -48283, perc: '-19,45%', trend: 'down', focus: 'Perda de Volume' },
-            { id: 'ROTA 20', delta: -42279, perc: '-25,67%', trend: 'down', focus: 'Execução' },
+            { id: 'ROTA 20', delta: -42279, perc: '-25,67%', trend: 'down', focus: 'Retração Execução' },
             { id: 'ROTA 07', delta: -29859, perc: '-15,17%', trend: 'down', focus: 'Perda Intensidade' },
             { id: 'ROTA 10', delta: -16108, perc: '-7,92%', trend: 'down', focus: 'Baixa Recompra' },
             { id: 'ROTA 12', delta: -13031, perc: '-5,52%', trend: 'down', focus: 'Alerta Execução' },
-            { id: 'ROTA 08', delta: -12223, perc: '-6,04%', trend: 'down', focus: 'Mix de Produtos' },
-            { id: 'ROTA 22', delta: -8327, perc: '-4,87%', trend: 'down', focus: 'Frequência' }
+            { id: 'ROTA 08', delta: -12223, perc: '-6,04%', trend: 'down', focus: 'Mix Ineficiente' },
+            { id: 'ROTA 22', delta: -8327, perc: '-4,87%', trend: 'down', focus: 'Baixa Frequência' }
         ];
 
-        // Função para formatar valores monetários abreviados
-        const formatK = (val) => {
+        const formatCurrency = (val) => {
             const sign = val >= 0 ? '+' : '';
             return `${sign}R$ ${(val / 1000).toFixed(1)}k`;
         };
 
-        // Renderizar listas de rotas
-        const motorsList = document.getElementById('motors-list');
-        const criticalList = document.getElementById('critical-list');
+        // Renderização Dinâmica de Rotas
+        const motorsEl = document.getElementById('motors-container');
+        const criticalEl = document.getElementById('critical-container');
 
-        routeData.forEach(route => {
-            const card = `
-                <div class="flex items-center justify-between p-5 ${route.trend === 'up' ? 'bg-emerald-50/50 border-emerald-100' : 'bg-rose-50/50 border-rose-100'} rounded-2xl border transition-all hover:shadow-md">
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-xl bg-white flex items-center justify-center font-black text-lg shadow-sm ${route.trend === 'up' ? 'text-emerald-600' : 'text-rose-600'}">
-                            ${route.trend === 'up' ? route.id.split(' ')[1] : '!'}
+        routes.forEach(route => {
+            const isUp = route.trend === 'up';
+            const html = `
+                <div class="flex items-center justify-between p-6 ${isUp ? 'bg-emerald-50/40 border-emerald-100 hover:bg-emerald-50' : 'bg-rose-50/40 border-rose-100 hover:bg-rose-50'} rounded-3xl border transition-all hover:shadow-xl group">
+                    <div class="flex items-center gap-5">
+                        <div class="w-12 h-12 rounded-2xl bg-white flex items-center justify-center font-black text-xl shadow-sm ${isUp ? 'text-emerald-600' : 'text-rose-600'} transition-transform group-hover:scale-110">
+                            ${isUp ? route.id.split(' ')[1] : '!'}
                         </div>
                         <div>
-                            <p class="font-black text-slate-800 uppercase tracking-tighter">${route.id}</p>
-                            <p class="text-[10px] text-slate-500 font-bold uppercase italic tracking-widest">${route.focus}</p>
+                            <p class="font-black text-slate-800 uppercase tracking-tighter text-lg">${route.id}</p>
+                            <p class="text-[10px] text-slate-400 font-black uppercase tracking-[0.2em] italic">${route.focus}</p>
                         </div>
                     </div>
                     <div class="text-right">
-                        <p class="${route.trend === 'up' ? 'text-emerald-600' : 'text-rose-600'} font-black text-lg leading-none">${formatK(route.delta)}</p>
-                        <p class="text-[10px] ${route.trend === 'up' ? 'text-emerald-700' : 'text-rose-700'} font-black italic mt-1">${route.perc}</p>
+                        <p class="${isUp ? 'positive-text' : 'negative-text'} text-xl leading-none tracking-tight">${formatCurrency(route.delta)}</p>
+                        <p class="text-xs ${isUp ? 'text-emerald-700' : 'text-rose-700'} font-black italic mt-1.5">${route.perc}</p>
                     </div>
                 </div>
             `;
-            if (route.trend === 'up') motorsList.innerHTML += card;
-            else criticalList.innerHTML += card;
+            if (isUp) motorsEl.innerHTML += html;
+            else criticalEl.innerHTML += html;
         });
 
-        // Configuração do Gráfico (Capítulo 1)
-        const ctx = document.getElementById('lineChart').getContext('2d');
+        // Configuração do Gráfico de Contribuição (Chart.js)
+        const ctx = document.getElementById('contributionChart').getContext('2d');
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Pastel', 'Recheado', 'Salgados', 'Macarrão', 'Terceiros'],
+                labels: ['PASTEL', 'RECHEADO', 'SALGADOS', 'MACARRÃO', 'TERCEIROS'],
                 datasets: [{
                     data: [216900, 205400, -16000, -66600, -127300],
                     backgroundColor: [
@@ -422,8 +456,9 @@
                         '#94a3b8', // Cinza
                         '#94a3b8'  // Cinza
                     ],
-                    borderRadius: 8,
+                    borderRadius: 12,
                     borderSkipped: false,
+                    barThickness: 32
                 }]
             },
             options: {
@@ -433,8 +468,13 @@
                 plugins: {
                     legend: { display: false },
                     tooltip: {
+                        backgroundColor: '#1e293b',
+                        titleFont: { size: 14, weight: 'bold' },
+                        bodyFont: { size: 14 },
+                        padding: 12,
+                        cornerRadius: 12,
                         callbacks: {
-                            label: (context) => formatK(context.raw)
+                            label: (context) => ` Impacto: ${formatCurrency(context.raw)}`
                         }
                     }
                 },
@@ -442,26 +482,27 @@
                     x: { display: false },
                     y: {
                         grid: { display: false },
+                        border: { display: false },
                         ticks: {
                             color: '#475569',
-                            font: { weight: 'bold', size: 12 }
+                            font: { weight: '900', size: 13, family: 'Inter' }
                         }
                     }
                 }
             },
             plugins: [{
-                id: 'valueLabels',
+                id: 'customLabels',
                 afterDraw: (chart) => {
                     const { ctx, data } = chart;
                     ctx.save();
                     chart.getDatasetMeta(0).data.forEach((bar, index) => {
                         const value = data.datasets[0].data[index];
-                        const text = formatK(value);
-                        ctx.font = 'bold 12px Inter';
+                        const text = formatCurrency(value);
+                        ctx.font = '900 13px Inter';
                         ctx.fillStyle = value >= 0 ? '#059669' : '#e11d48';
                         ctx.textAlign = value >= 0 ? 'left' : 'right';
-                        const padding = 10;
-                        ctx.fillText(text, bar.x + (value >= 0 ? padding : -padding), bar.y + 4);
+                        const offset = value >= 0 ? 12 : -12;
+                        ctx.fillText(text, bar.x + offset, bar.y + 5);
                     });
                     ctx.restore();
                 }
